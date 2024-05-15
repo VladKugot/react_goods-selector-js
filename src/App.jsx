@@ -19,15 +19,13 @@ export const App = () => {
   const [goodName, setGoodName] = useState('Jam');
 
   const reset = () => {
-    setGoodName('No goods');
+    setGoodName(null);
   };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {goodName === 'No goods'
-          ? 'No goods selected'
-          : `${goodName} is selected`}
+        {!goodName ? 'No goods selected' : `${goodName} is selected`}
         <button
           data-cy="ClearButton"
           type="button"
