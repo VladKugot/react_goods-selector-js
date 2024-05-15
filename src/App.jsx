@@ -16,21 +16,23 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [goodName, setgoodName] = useState('No goods selected');
-  const [selectedGoodIndex, setSelectedGoodIndex] = useState(null);
+  const [goodName, setGoodName] = useState('Jam');
+
+  const reset = () => {
+    setGoodName('No goods');
+  };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {goodName}
+        {goodName === 'No goods'
+          ? 'No goods selected'
+          : `${goodName} is selected`}
         <button
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-          onClick={() => {
-            setgoodName('No goods selected');
-            setSelectedGoodIndex(null);
-          }}
+          onClick={reset}
         />
       </h1>
       <table className="table">
@@ -40,26 +42,19 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                index === selectedGoodIndex
-                  ? 'has-background-success-light'
-                  : ''
+                good === goodName ? 'has-background-success-light' : ''
               }
             >
               <td>
                 <button
-                  data-cy={
-                    index === selectedGoodIndex ? 'RemoveButton' : 'AddButton'
-                  }
+                  data-cy={good === goodName ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={
-                    index === selectedGoodIndex ? 'button is-info' : 'button'
-                  }
+                  className={good === goodName ? 'button is-info' : 'button'}
                   onClick={() => {
-                    setgoodName(`${good} is selected`);
-                    setSelectedGoodIndex(index);
+                    setGoodName(good);
                   }}
                 >
-                  {index === selectedGoodIndex ? '-' : '+'}
+                  {good === goodName ? '-' : '+'}
                 </button>
               </td>
 
